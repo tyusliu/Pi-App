@@ -7,12 +7,21 @@ import {
 	Text,
 	Alert,
 } from 'react-native';
+import { digits } from './Digits';
+
+function Display() {
+	return <Text>{digits}</Text>;
+}
+
+function Timer() {}
+
+function Number(num) {}
 
 export default function Pi(navigation) {
 	return (
-		<Button
-			title='Go to Pi Game'
-			onPress={() => navigation.navigate('Pi')}
-		/>
+		<SafeAreaView>
+			<Text>Welcome to the Pi game!</Text>
+			<Display></Display>
+		</SafeAreaView>
 	);
 }
