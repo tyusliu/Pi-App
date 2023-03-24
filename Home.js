@@ -8,11 +8,13 @@ import {
 	Alert,
 } from 'react-native';
 
-export default function Home({ navigation }) {
-	return (
-		<Button
-			title='Go to Pi Game'
-			onPress={() => navigation.navigate('Pi')}
-		/>
-	);
+export default class Home extends React.Component {
+	render() {
+		return (
+			<Button
+				title='Go to Pi Game'
+				onPress={() => this.props.navigation.navigate('Pi')}
+			/>
+		);
+	}
 }
