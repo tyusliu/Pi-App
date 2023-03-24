@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
-import {
-	StyleSheet,
-	Button,
-	View,
-	SafeAreaView,
-	Text,
-	Alert,
-} from 'react-native';
+import { StyleSheet, View, SafeAreaView, Text, Alert } from 'react-native';
+import { Button } from 'react-native-paper';
+import * as Haptics from 'expo-haptics';
 import { digits } from './Digits';
 
 class Number extends React.Component {
@@ -24,8 +19,11 @@ class Number extends React.Component {
 		return (
 			<Button
 				title={this.props.num}
+				style={styles.button}
 				onPress={() => this._handlePress(this.props.num)}
-			></Button>
+			>
+				{this.props.num}
+			</Button>
 		);
 	}
 }
@@ -41,11 +39,11 @@ export default class Pi extends React.Component {
 	}
 
 	handleNumPress(num) {
-		console.log(this.state);
-		console.log(this.state.display.concat([num]));
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
 		this.setState({
 			display: this.state.display.concat([num]),
 		});
+		console.log(this.state.display.concat([num]));
 		console.log('handle press', num);
 	}
 
@@ -55,31 +53,77 @@ export default class Pi extends React.Component {
 				<View>
 					<Text>{this.state.display.join('')}</Text>
 				</View>
-				<Number num='1' handleNumPress={this.handleNumPress}></Number>
-				<Number num='2' handleNumPress={this.handleNumPress}></Number>
-				<Number num='3' handleNumPress={this.handleNumPress}></Number>
-				<Number num='4' handleNumPress={this.handleNumPress}></Number>
-				<Number num='5' handleNumPress={this.handleNumPress}></Number>
-				<Number num='6' handleNumPress={this.handleNumPress}></Number>
-				<Number num='7' handleNumPress={this.handleNumPress}></Number>
-				<Number num='8' handleNumPress={this.handleNumPress}></Number>
-				<Number num='9' handleNumPress={this.handleNumPress}></Number>
-				<Number num='0' handleNumPress={this.handleNumPress}></Number>
+				<View style={styles.main}>
+					<View style={styles.row}>
+						<Number
+							num='7'
+							handleNumPress={this.handleNumPress}
+						></Number>
+						<Number
+							num='8'
+							handleNumPress={this.handleNumPress}
+						></Number>
+						<Number
+							num='9'
+							handleNumPress={this.handleNumPress}
+						></Number>
+					</View>
+					<View style={styles.row}>
+						<Number
+							num='4'
+							handleNumPress={this.handleNumPress}
+						></Number>
+						<Number
+							num='5'
+							handleNumPress={this.handleNumPress}
+						></Number>
+						<Number
+							num='6'
+							handleNumPress={this.handleNumPress}
+						></Number>
+					</View>
+					<View style={styles.row}>
+						<Number
+							num='1'
+							handleNumPress={this.handleNumPress}
+						></Number>
+						<Number
+							num='2'
+							handleNumPress={this.handleNumPress}
+						></Number>
+						<Number
+							num='3'
+							handleNumPress={this.handleNumPress}
+						></Number>
+					</View>
+					<View style={styles.row}>
+						<Number
+							num='0'
+							handleNumPress={this.handleNumPress}
+						></Number>
+					</View>
+				</View>
 			</SafeAreaView>
 		);
 	}
 }
 
 const styles = StyleSheet.create({
+	main: {
+		flexDirection: 'column',
+		alignItems: 'center',
+	},
+	row: {
+		flexDirection: 'row',
+	},
 	container: {
 		paddingTop: 60,
 		alignItems: 'center',
 	},
 	button: {
 		marginBottom: 30,
-		width: 260,
+		width: '25%',
 		alignItems: 'center',
-		backgroundColor: '#2196F3',
 	},
 	buttonText: {
 		textAlign: 'center',
